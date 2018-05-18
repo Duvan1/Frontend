@@ -9,6 +9,10 @@ import { DataTableModule} from "angular2-datatable";
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 
+import { ProductServiceService } from './services/product-service.service';
+import { EmpleadoServiceService } from './services/empleado-service.service';
+import { AuthServiceService } from './services/auth-service.service'
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
@@ -21,6 +25,11 @@ import { RegProductosComponent } from './productos/reg-productos/reg-productos.c
 import { ActProductosComponent } from './productos/act-productos/act-productos.component';
 import { TablaProductosComponent } from './productos/tabla-productos/tabla-productos.component';
 import { DataFilterPipe } from './pipes/data-filter.pipe';
+import { ChartEmpleadosComponent } from './empleados/chart-empleados/chart-empleados.component';
+import { RegEmpleadosComponent } from './empleados/reg-empleados/reg-empleados.component';
+import { ActEmpleadosComponent } from './empleados/act-empleados/act-empleados.component';
+import { EmpleadoFilterPipe } from './pipes/empleado-filter.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -37,7 +46,11 @@ import { DataFilterPipe } from './pipes/data-filter.pipe';
     RegProductosComponent,
     ActProductosComponent,
     TablaProductosComponent,
-    DataFilterPipe
+    DataFilterPipe,
+    ChartEmpleadosComponent,
+    RegEmpleadosComponent,
+    ActEmpleadosComponent,
+    EmpleadoFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -47,9 +60,10 @@ import { DataFilterPipe } from './pipes/data-filter.pipe';
     FormsModule,
     HttpModule,
     DataTableModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ProductServiceService, EmpleadoServiceService, AuthServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

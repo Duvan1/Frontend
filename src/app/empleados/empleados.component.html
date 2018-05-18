@@ -1,4 +1,30 @@
-<app-tabla-empleados></app-tabla-empleados>
+<div class="card mb-3">
+  <div class="card-header">
+    <p><span class="fa fa-list"></span> Todos los empleados</p>
+  </div>
+  <div class="card-body">
+    <app-tabla-empleados></app-tabla-empleados>
+  </div>
+</div>
+
+<div class="card mb-3" name="acciones">
+  <div class="card-body">
+    <ngb-tabset #t="ngbTabset">
+      <ngb-tab id="tab-selectbyid1" title="Registrar Empleado">
+        <ng-template ngbTabContent>
+          <app-reg-empleados></app-reg-empleados>         
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-selectbyid2">
+        <ng-template ngbTabTitle><b>Actualizar Empleado</b></ng-template>
+        <ng-template ngbTabContent>
+          <app-act-empleados></app-act-empleados> 
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>
+
 <!-- Area Chart Example-->
 <!-- Area Chart Example-->
 <div class="row">

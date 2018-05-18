@@ -1,0 +1,64 @@
+<div class="card ">
+  <div class="card-body">
+    <form>
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="nombreEmp">Nombre</label>
+            <input class="form-control" id="nombreEmp" type="text" aria-describedby="nameHelp" placeholder="Nombre del Empleado">
+          </div>
+          <div class="col-md-6">
+            <label for="apellidoEmp">Apellidos</label>
+            <input class="form-control" id="apellidoEmp" type="text" aria-describedby="nameHelp" placeholder="Apellidos del empleado">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="dirEmp">Dirección</label>
+            <input class="form-control" id="dirEmp" type="text" placeholder="Dirección del empleado" >
+          </div>
+          <div class="col-md-6">
+            <label for="cargoEmp">Cargo</label>
+            <select name="categorias" class="form-control selectpicker" id="cargoEmp">
+              <option selected>Cargo...</option>
+				  <option value="Telas 1">Vendedor</option>
+				  <option value="Telas 2">Administrador</option>
+				  <option value="Telas 3">Analista de ventas</option>
+				</select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="telEmp">Telefono</label>
+            <input class="form-control" id="telEmp" type="number" placeholder="Telefono del empleado">
+          </div>
+          <div class="col-md-6">
+            <label for="emailEmp">Correo</label>
+            <input class="form-control" id="emailEmp" type="email" aria-describedby="nameHelp" placeholder="Correo del empleado">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="userName">Nombre de usuario</label>
+        <input class="form-control" id="userName" type="text" placeholder="Nombre de usaurio del empleado" >
+      </div>
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="contraEmp">Contraseña</label>
+            <input class="form-control" id="contraEmp" type="password" placeholder="Contraseña">
+          </div>
+          <div class="col-md-6">
+            <label for="retryContra">Reescribir contraseña</label>
+            <input class="form-control" id="retryContra" type="password" aria-describedby="nameHelp" placeholder="contraseña">
+          </div>
+        </div>
+      </div>
+      <input type="submit" value="Registrar" class="btn btn-primary btn-block">
+    </form>
+  </div>
+</div>

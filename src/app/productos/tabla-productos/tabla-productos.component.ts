@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductServiceService } from '../../services/product-service.service'
+import {Observable} from 'rxjs/Rx';
+import { Product } from '../../models/product';
 import {Http} from "@angular/http";
 
 @Component({
@@ -7,21 +10,20 @@ import {Http} from "@angular/http";
   styleUrls: ['./tabla-productos.component.css']
 })
 export class TablaProductosComponent implements OnInit {
-
-  
-	public data: any[];
+	
+  public data: any[];
   public filterQuery = "";
   public rowsOnPage = 5;
   public sortBy = "email";
   public sortOrder = "asc";
- 
-  constructor(private _http: Http) { }
- 
+
+  constructor(private productServiceService: ProductServiceService) { }
+
   ngOnInit(): void {
-    this._http.get("/assets/data.json")
+    this.productServiceService.getProduts()
       .subscribe((data)=> {
         setTimeout(()=> {
-          this.data = data.json();
+          this.data = data;
         }, 2000);
       });
   }

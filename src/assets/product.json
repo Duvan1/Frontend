@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Billetera",
+    "description": "Billetera de cuero negro",
+    "reference": "REF-005",
+    "status" : "inactive",
+    "category" : "tu hermana",
+    "price" : 1200
+  },
+  {
+    "id": 2,
+    "name": "producto2",
+    "description": "Billetera de cuero negro",
+    "reference": "REF-005",
+    "status" : "inactive",
+    "category" : "tu hermana",
+    "price" : 1200
+  },
+  {
+    "id": 3,
+    "name": "producto3",
+    "description": "Billetera de cuero negro",
+    "reference": "REF-005",
+    "status" : "inactive",
+    "category" : "tu hermana",
+    "price" : 1200
+  },
+  {
+    "id": 4,
+    "name": "producto4",
+    "description": "Billetera de cuero negro",
+    "reference": "REF-005",
+    "status" : "inactive",
+    "category" : "tu hermana",
+    "price" : 1200
+  },
+]
