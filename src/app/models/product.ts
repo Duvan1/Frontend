@@ -1,6 +1,8 @@
 export class Product {
-	constructor(public id:number, public name:string,
-				public descripcion:string, public reference:string, public status:string, public category:string, public price:number){
+	constructor(public id:number,public Empleado_cedula:string,public nombre:string,
+				 public description:string,public cantidad:number,
+				 public precio_estandar:number, public descuento_paquete:number,
+				 public categoria:string){
 
 	}
 }

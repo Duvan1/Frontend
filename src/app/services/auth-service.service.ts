@@ -11,6 +11,7 @@ export class AuthServiceService {
   constructor(private http: HttpClient) { }
 
   signup(user, gettoken = null): Observable<any>{
+    console.log('lo que trae: '+gettoken);
   	if (gettoken != null) {
   		user.gettoken = 'true';
   		console.log('entro al token');
@@ -19,7 +20,7 @@ export class AuthServiceService {
   	let params = 'json='+json;
   	let headers = new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded');
 
-  	return this.http.post('http://localhost:8000/api/login', params, {headers: headers});
+  	return this.http.post('http://laravel-api.test/api/login', params, {headers: headers});
   }
 
   getToken(){

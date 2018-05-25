@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService }from '../services/auth-service.service';
+import { ActivatedRoute, Router } from "@angular/router/";
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +10,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  public identify :any;
 
-  constructor() { }
+  constructor(
+    private _authServiceService: AuthServiceService,
+    private route: ActivatedRoute,
+    private router: Router) {
+    
+  }
 
-  ngOnInit() {
+  ngOnInit() {   
   }
 
 

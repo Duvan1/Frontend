@@ -1,0 +1,82 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+		      <div class="row">
+      <div class="col-sm-6">
+        <div class="well">
+          <div class="box">
+            <div class="text-info">Breakfast</div>
+            <hr>
+            <div *ngFor="let p of products">
+            	<button class="btn btn-primary btn-lg btn-block" (click)="add(p)">
+            		<i class="fa fa-money" aria-hidden="true"></i>{{p.precio_estandar}} - {{p.nombre}}
+            	</button>
+	          </div>
+	        </div>
+
+          <br><br>
+          <div class="box">
+            <div class="text-info">Bewerages</div>
+            <hr>
+
+            <button class="buttons btn btn-primary" (click)="add(food.coldcoffee)">Cold Coffee</button>
+            <button class="buttons btn btn-primary" (click)="add(food.hotcoffee)">Hot Coffee</button>
+            <button class="buttons btn btn-primary" (click)="add(food.coke)">Coke</button>
+            <button class="buttons btn btn-primary" (click)="add(food.dietcoke)">Diet Coke</button>
+            <button class="buttons btn btn-primary" (click)="add(food.pepsi)">Pepsi</button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="well">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Order Summary </h3>
+            </div>
+            <div class="panel-body" style="max-height:320px; overflow:auto;">
+              <div class="text-warning" *ngIf="order.length == 0">
+                Noting ordered yet !
+                {{order.length}}
+              </div>
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let item of order">
+                  <span> {{item.item.nombre}} </span>
+
+                  <div class="btn-group btn-group-toggle pull-right" role="group" aria-label="...">
+                      <button type="button" class="btn btn-primary btn-xs " [disabled]="" (click)="subtractItem(item, $index)">
+                        <span class="fa fa-minus"></span>
+                      </button>
+                      <button type="button" class="btn  btn-xs btn-success" (click)="addItem(item, $index)">
+                        <span class="fa fa-plus"></span>
+                      </button>
+                       <button type="button" class="btn btn-danger btn-xs"  (click)="deleteItem($index)">
+                        <span class="fa fa-trash"></span>
+                      </button>                     
+                  </div>
+                  <div class="label label-success pull-right">${{item.totalPrice}}</div>
+                  <div class="label label-default pull-right">{{item.orderedItemCnt}}</div>
+
+                </li>
+              </ul>
+
+            </div>
+            <div class="panel-footer" *ngIf="!order.length == 0">
+              <div class="label label-danger ">Total: ${{getSum()}}</div>
+            </div>
+            <div class="panel-footer" *ngIf="!order.length == 0">
+              <div class="text-muted">
+                Do not let go of customer without taking payment !
+              </div>
+            </div>
+            <div class="pull-right" *ngIf="!order.length == 0">
+              <button class="btn btn-default" (click)="clearOrder()" [disabled]="!order.length"><i class="fa fa-trash"></i>Borrar</button>
+              <button class="btn btn-danger" (click)="checkout()" [disabled]="!order.length">Checkout</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>
+</div>

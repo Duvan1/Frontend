@@ -113,12 +113,12 @@ body.fixed-nav {
   display: none;
 }
 
-#mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link {
+#mainNav .navbar-collapse .navbar-nav > .nav-item.dropleft > .nav-link {
   position: relative;
   min-width: 45px;
 }
 
-#mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
+#mainNav .navbar-collapse .navbar-nav > .nav-item.dropleft > .nav-link:after {
   float: right;
   width: auto;
   content: '\f105';
@@ -126,18 +126,18 @@ body.fixed-nav {
   font-family: 'FontAwesome';
 }
 
-#mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link .indicator {
+#mainNav .navbar-collapse .navbar-nav > .nav-item.dropleft > .nav-link .indicator {
   position: absolute;
   top: 5px;
   left: 21px;
   font-size: 10px;
 }
 
-#mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown.show > .nav-link:after {
+#mainNav .navbar-collapse .navbar-nav > .nav-item.dropleft.show > .nav-link:after {
   content: '\f107';
 }
 
-#mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown .dropdown-menu > .dropdown-item > .dropdown-message {
+#mainNav .navbar-collapse .navbar-nav > .nav-item.dropleft .dropdown-menu > .dropdown-item > .dropdown-message {
   overflow: hidden;
   max-width: none;
   text-overflow: ellipsis;

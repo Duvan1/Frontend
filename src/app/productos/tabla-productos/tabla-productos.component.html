@@ -1,5 +1,67 @@
-<div class="col-md-12">
+<!--
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
 
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+-->
+<div class="col-md-12">
   <table
     class="table table-striped"
     [mfData]="data | dataFilter : filterQuery"
@@ -8,34 +70,42 @@
     [(mfSortBy)]="sortBy"
     [(mfSortOrder)]="sortOrder"
   >
-    <thead>
+    <thead class="thead-dark">
     <tr>
-      <th style="width: 20%">
-        <mfDefaultSorter by="name">Name</mfDefaultSorter>
+      <th scope="col" >
+        <mfDefaultSorter by="codigo">Codigo</mfDefaultSorter>
       </th>
-      <th style="width: 50%">
-        <mfDefaultSorter by="email">Email</mfDefaultSorter>
+      <th scope="col" >
+        <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
       </th>
-      <th style="width: 10%">
-        <mfDefaultSorter by="age">Age</mfDefaultSorter>
+      <th scope="col" >
+        <mfDefaultSorter by="cantidad">Cantidad</mfDefaultSorter>
       </th>
-      <th style="width: 20%">
-        <mfDefaultSorter by="city">City</mfDefaultSorter>
+      <th scope="col">
+        <mfDefaultSorter by="precio">Precio</mfDefaultSorter>
+      </th>
+      <th scope="col" >
+        <mfDefaultSorter by="categoria">Categoria</mfDefaultSorter>
+      </th>
+      <th scope="col" >
+        <mfDefaultSorter by="eliminar">eliminar</mfDefaultSorter>
       </th>
     </tr>
     <tr>
       <th colspan="5">
-        Filter by name:
+        Buscar por nombre:
         <input class="form-control" [(ngModel)]="filterQuery"/>
       </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of mf.data">
-      <td>xdcfvgbhnj</td>
-      <td>xdcfvgbhnj</td>
-      <td class="text-right">xdcfvgbhnj</td>
-      <td>xdcfvgbhnj</td>
+    <tr *ngFor="let item of data">
+      <td>{{item.id}}</td>
+      <td>{{item.nombre}}</td>
+      <td>{{item.cantidad}}</td>
+      <td>{{item.precio_estandar}}</td>
+      <td>{{item.categoria}}</td>
+      <td><a (click)="delete(item.id)" class="btn btn-danger">borrarsito</a></td>
     </tr>
     </tbody>
     <tfoot>

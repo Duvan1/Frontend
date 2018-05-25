@@ -1,27 +1,32 @@
-<div class="card mb-3">
-	<div class="card-header">
-		<p><span class="fa fa-list"></span> Todos los productos</p>
-	</div>
-	<div class="card-body">
-		<app-tabla-productos></app-tabla-productos>
-	</div>
-</div>
+<div class="content-wrapper">
+  <div class="container-fluid">
+		<div class="card mb-3">
+			<div class="card-header">
+				<p><span class="fa fa-list"></span> Todos los productos</p>
+			</div>
+			<div class="card-body">
+				<app-tabla-productos></app-tabla-productos>
+			</div>
+		</div>
 
 
-<div class="card mb-3" name="acciones">
-	<div class="card-body">
-		<ngb-tabset #t="ngbTabset">
-		  <ngb-tab id="tab-selectbyid1" title="Registrar producto">
-		    <ng-template ngbTabContent>
-		      <app-reg-productos></app-reg-productos>		      
-		    </ng-template>
-		  </ngb-tab>
-		  <ngb-tab id="tab-selectbyid2">
-		    <ng-template ngbTabTitle><b>Actualizar producto</b></ng-template>
-		    <ng-template ngbTabContent>
-		    	<app-act-productos></app-act-productos>	
-		    </ng-template>
-		  </ngb-tab>
-		</ngb-tabset>
+<!--
+		<div class="card mb-3" name="acciones">
+			<div class="card-body">
+				<ngb-tabset #t="ngbTabset">
+				  <ngb-tab id="tab-selectbyid1" title="Registrar producto">
+				    <ng-template ngbTabContent>
+				      <app-reg-productos></app-reg-productos>		      
+				    </ng-template>
+				  </ngb-tab>
+				  <ngb-tab id="tab-selectbyid2">
+				    <ng-template ngbTabTitle><b>Actualizar producto</b></ng-template>
+				    <ng-template ngbTabContent>
+				    	<app-act-productos></app-act-productos>	
+				    </ng-template>
+				  </ngb-tab>
+				</ngb-tabset>
+			</div>
+		</div>-->
 	</div>
 </div>

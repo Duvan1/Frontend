@@ -30,7 +30,7 @@ import { RegEmpleadosComponent } from './empleados/reg-empleados/reg-empleados.c
 import { ActEmpleadosComponent } from './empleados/act-empleados/act-empleados.component';
 import { EmpleadoFilterPipe } from './pipes/empleado-filter.pipe';
 import { HttpClientModule } from '@angular/common/http';
-
+import { VentasComponent } from './ventas/ventas.component';
 
 
 @NgModule({
@@ -50,7 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
     ChartEmpleadosComponent,
     RegEmpleadosComponent,
     ActEmpleadosComponent,
-    EmpleadoFilterPipe
+    EmpleadoFilterPipe,
+    VentasComponent
   ],
   imports: [
     BrowserModule,
