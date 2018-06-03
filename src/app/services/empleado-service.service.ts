@@ -9,7 +9,7 @@ export class EmpleadoServiceService {
   constructor(private http:Http) { }
 
   getEmpleados(){
-  	return this.http.get('http://localhost:8000/api/empleado/').map((response:Response)=> response.json());
+  	return this.http.get('http://laravel-api.test/api/empleado/').map((response:Response)=> response.json());
   }
 
 }

@@ -32,7 +32,7 @@ export class RegProductosComponent implements OnInit {
   	if (this.identify == null) {
   		this.router.navigate(['/login']);
   	}else{
-  		this.product = new Product(100, this.identify.sub,'','',1,1,1,'');
+  		this.product = new Product(100000, this.identify.sub,'','',1,1,1,'');
   	}
   }
 

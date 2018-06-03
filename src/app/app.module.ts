@@ -11,7 +11,10 @@ import { ChartsModule } from 'ng2-charts';
 
 import { ProductServiceService } from './services/product-service.service';
 import { EmpleadoServiceService } from './services/empleado-service.service';
-import { AuthServiceService } from './services/auth-service.service'
+import { AuthServiceService } from './services/auth-service.service';
+import { VentaServiceService } from './services/venta-service.service';
+import { DetallesVentaServiceService } from './services/detalles-venta-service.service';
+import { ClienteServiceService } from './services/cliente-service.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -64,7 +67,7 @@ import { VentasComponent } from './ventas/ventas.component';
     NgbModule.forRoot(),
     HttpClientModule
   ],
-  providers: [ProductServiceService, EmpleadoServiceService, AuthServiceService],
+  providers: [ProductServiceService, EmpleadoServiceService, AuthServiceService, ClienteServiceService, VentaServiceService, DetallesVentaServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
