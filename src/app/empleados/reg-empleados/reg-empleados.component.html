@@ -1,64 +1,105 @@
-<div class="card ">
-  <div class="card-body">
-    <form>
-      <div class="form-group">
-        <div class="form-row">
-          <div class="col-md-6">
-            <label for="nombreEmp">Nombre</label>
-            <input class="form-control" id="nombreEmp" type="text" aria-describedby="nameHelp" placeholder="Nombre del Empleado">
-          </div>
-          <div class="col-md-6">
-            <label for="apellidoEmp">Apellidos</label>
-            <input class="form-control" id="apellidoEmp" type="text" aria-describedby="nameHelp" placeholder="Apellidos del empleado">
-          </div>
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="card mb-3">
+      <div class="card-header">
+        <p *ngIf="!actualizar"><span class="fa fa-list"></span> Registrar empleado</p>
+        <p *ngIf="actualizar"><span class="fa fa-list"></span> Actualizar empleado</p>
+      </div>
+      <div class="card-body">
+      <div class="card ">
+        <div class="card-body">
+          <form #empleadoForm="ngForm" (ngSubmit)="onSubmit(empleadoForm)">
+            <div class="form-group">
+              <div class="form-row">
+                
+                <div class="col-md-6">
+                  <label for="nombreEmp">Nombre</label>
+                  <input name="Nombre" [(ngModel)]="empleado.Nombre" class="form-control" id="nombreEmp" type="text" aria-describedby="nameHelp" placeholder="Nombre del Empleado">
+                </div>
+                <div class="col-md-6">
+                  <label for="apellidoEmp">Apellidos</label>
+                  <input name="Apellido" [(ngModel)]="empleado.Apellido" class="form-control" id="apellidoEmp" type="text" aria-describedby="nameHelp" placeholder="Apellidos del empleado">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="dirEmp">Dirección</label>
+                  <input name="direccion" [(ngModel)]="empleado.direccion" class="form-control" id="dirEmp" type="text" placeholder="Dirección del empleado" >
+                </div>
+                <div class="col-md-6">
+                  <label for="cargoEmp">Cargo</label>
+                  <select name="Cargo" [(ngModel)]="empleado.Cargo" class="form-control selectpicker" id="cargoEmp">
+          				  <option value="vendedor">Vendedor</option>
+          				  <option value="administrador">Administrador</option>
+          				  <option value="analista de ventas">Analista de ventas</option>
+                    <option value="gerente">Gerente</option>
+                    <option value="contador">Contador</option>
+          				</select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="telEmp">Telefono</label>
+                  <input name="telefono" [(ngModel)]="empleado.telefono" class="form-control" id="telEmp" type="number" placeholder="Telefono del empleado" >
+                </div>
+                <div class="col-md-6">
+                  <label for="emailEmp">Correo</label>
+                  <input name="correo" [(ngModel)]="empleado.correo" class="form-control" id="emailEmp" type="email" aria-describedby="nameHelp" placeholder="Correo del empleado">
+                </div>
+              </div>
+            </div> 
+
+            <div *ngIf="!actualizar">
+              <label for="userReg">¿Registrar un usuario para este empleado?</label>
+              <select name="regUser"  [(ngModel)]="regUser" class="form-control selectpicker" id="userReg" (ngModelChange)="onChange($event)">
+                <option value="si" selected>Si</option>
+                <option value="no">No</option>
+              </select>
+              <br>
+
+              <div *ngIf="reg">
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <label for="userName">Nombre del usuario</label>
+                      <input name="username" [(ngModel)]="user.username" class="form-control" id="userName" type="text" placeholder="Nombre de usaurio del empleado" (ngModelChange)="userNombre($event)">
+                      <span class="errorsirijillo" *ngIf="exist">Este nombre de usuario ya existe.</span>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="rol">Rol del usuario</label>
+                      <select name="rol"  [(ngModel)]="user.rol" class="form-control selectpicker" id="userRol" (ngModelChange)="onChangeRol($event)">
+                        <option value="vendedor">Vendedor</option>
+                        <option value="analiste de ventas">Analista de ventas</option>
+                        <option value="administrador">Administrador</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <label for="contraEmp">Contraseña</label>
+                      <input name="password" [(ngModel)]="user.password" class="form-control" id="contraEmp" type="password" placeholder="Contraseña">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="retryContra">Reescribir contraseña</label>
+                      <input name="retryPassword" [(ngModel)]="retryPassword" class="form-control" id="retryContra" type="password" aria-describedby="nameHelp" placeholder="contraseña">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <input type="submit" value="Registrar" class="btn btn-primary btn-block" [disabled]="exist || cedulaBusq">
+          </form>
         </div>
       </div>
-      <div class="form-group">
-        <div class="form-row">
-          <div class="col-md-6">
-            <label for="dirEmp">Dirección</label>
-            <input class="form-control" id="dirEmp" type="text" placeholder="Dirección del empleado" >
-          </div>
-          <div class="col-md-6">
-            <label for="cargoEmp">Cargo</label>
-            <select name="categorias" class="form-control selectpicker" id="cargoEmp">
-              <option selected>Cargo...</option>
-				  <option value="Telas 1">Vendedor</option>
-				  <option value="Telas 2">Administrador</option>
-				  <option value="Telas 3">Analista de ventas</option>
-				</select>
-          </div>
-        </div>
       </div>
-      <div class="form-group">
-        <div class="form-row">
-          <div class="col-md-6">
-            <label for="telEmp">Telefono</label>
-            <input class="form-control" id="telEmp" type="number" placeholder="Telefono del empleado">
-          </div>
-          <div class="col-md-6">
-            <label for="emailEmp">Correo</label>
-            <input class="form-control" id="emailEmp" type="email" aria-describedby="nameHelp" placeholder="Correo del empleado">
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="userName">Nombre de usuario</label>
-        <input class="form-control" id="userName" type="text" placeholder="Nombre de usaurio del empleado" >
-      </div>
-      <div class="form-group">
-        <div class="form-row">
-          <div class="col-md-6">
-            <label for="contraEmp">Contraseña</label>
-            <input class="form-control" id="contraEmp" type="password" placeholder="Contraseña">
-          </div>
-          <div class="col-md-6">
-            <label for="retryContra">Reescribir contraseña</label>
-            <input class="form-control" id="retryContra" type="password" aria-describedby="nameHelp" placeholder="contraseña">
-          </div>
-        </div>
-      </div>
-      <input type="submit" value="Registrar" class="btn btn-primary btn-block">
-    </form>
+  </div>
   </div>
 </div>

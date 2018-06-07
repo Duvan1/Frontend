@@ -6,7 +6,9 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { ProductosComponent } from './productos/productos.component';
 import { RegProductosComponent } from './productos/reg-productos/reg-productos.component';
+import { RegEmpleadosComponent } from './empleados/reg-empleados/reg-empleados.component';
 import { ActProductosComponent } from './productos/act-productos/act-productos.component';
+import { ActEmpleadosComponent } from './empleados/act-empleados/act-empleados.component';
 import { VentasComponent } from './ventas/ventas.component';
 
 
@@ -17,8 +19,10 @@ const routes: Routes = [
   	{path: 'empleados', component: EmpleadosComponent},
   	{path: 'productos', component: ProductosComponent},
   	{path: 'registrar-productos', component: RegProductosComponent},
+    {path: 'registrar-empleado', component: RegEmpleadosComponent},
     {path: 'reg-ventas', component: VentasComponent},
-  	{path: 'actualizar-productos/:id', component: ActProductosComponent},
+  	{path: 'productos/actualizar-productos/:id', component: ActProductosComponent},
+    {path: 'empleados/actualizar-empleado/:id', component: ActEmpleadosComponent},
   	{path: '**', component: NotfoundpageComponent}
 ];
 

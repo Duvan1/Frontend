@@ -4,10 +4,8 @@ export class User{
 		public id: number,
 		public rol: string,
 		public username: string,
-		public Empleado_cedula: number,
-		public password: string,
-		public created_at: any,
-		public updated_at: any
+		public empleado_cedula: number,
+		public password: string
 	) {
 		// code...
 	}

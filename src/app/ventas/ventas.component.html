@@ -30,7 +30,8 @@
                 <strong>Cliente nuevo!</strong> por favor llene todos los campos
               </div>
             	<label for="CedulaCliente">Cedula del cliente</label>
-              <input class="form-control" name="cedula" #CedulaCliente="ngModel" [(ngModel)]="cliente.cedula" type="number" aria-describedby="nameHelp" min=100000 placeholder="Ingrese la cedula." (keydown)="onKeydown($event)">
+              <input class="form-control" name="cedula" #CedulaCliente="ngModel" [(ngModel)]="cliente.cedula" type="number" aria-describedby="nameHelp" min=100000 placeholder="Ingrese la cedula."  (ngModelChange)="cedulaBusqueda($event)">
+              <span class="errorsirijillo" *ngIf="cedulaBusq == 'El documento es demasiado corto.' || cedulaBusq == 'El documento es demasiado largo.'">{{cedulaBusq}}</span>
               
               <div *ngIf="clientExist">
               	<label for="NombreCliente">Nombre del cliente</label>

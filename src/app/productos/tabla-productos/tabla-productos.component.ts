@@ -32,14 +32,13 @@ export class TablaProductosComponent implements OnInit {
   }
 
   getProducts(){
-
     this.productServiceService.getProduts()
       .subscribe((data)=> {
         if (data.status == 'success') {
           // code...
           setTimeout(()=> {
           this.data = data.productos;//Array.of(data);
-          console.log(data.productos);
+          console.log(JSON.stringify(data.productos));
           }, 2000);
         }
         

@@ -8,6 +8,8 @@ import { HttpModule } from '@angular/http';
 import { DataTableModule} from "angular2-datatable";
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
+import {FlashMessagesModule} from 'angular2-flash-messages';
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 import { ProductServiceService } from './services/product-service.service';
 import { EmpleadoServiceService } from './services/empleado-service.service';
@@ -15,6 +17,7 @@ import { AuthServiceService } from './services/auth-service.service';
 import { VentaServiceService } from './services/venta-service.service';
 import { DetallesVentaServiceService } from './services/detalles-venta-service.service';
 import { ClienteServiceService } from './services/cliente-service.service';
+import { UserServiceService } from './services/user-service.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -65,9 +68,19 @@ import { VentasComponent } from './ventas/ventas.component';
     HttpModule,
     DataTableModule,
     NgbModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FlashMessagesModule
   ],
-  providers: [ProductServiceService, EmpleadoServiceService, AuthServiceService, ClienteServiceService, VentaServiceService, DetallesVentaServiceService],
+  providers: [
+      ProductServiceService,
+      EmpleadoServiceService, 
+      AuthServiceService, 
+      ClienteServiceService, 
+      VentaServiceService, 
+      DetallesVentaServiceService,
+      FlashMessagesService,
+      UserServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,67 +1,5 @@
-<!--
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
--->
 <div class="col-md-12">
+  
   <table
     class="table table-striped"
     [mfData]="data | dataFilter : filterQuery"
@@ -88,11 +26,11 @@
         <mfDefaultSorter by="categoria">Categoria</mfDefaultSorter>
       </th>
       <th scope="col" >
-        <mfDefaultSorter by="eliminar">eliminar</mfDefaultSorter>
+        <mfDefaultSorter by="actualizar">actualizar</mfDefaultSorter>
       </th>
     </tr>
     <tr>
-      <th colspan="5">
+      <th colspan="6">
         Buscar por nombre:
         <input class="form-control" [(ngModel)]="filterQuery"/>
       </th>
@@ -105,12 +43,12 @@
       <td>{{item.cantidad}}</td>
       <td>{{item.precio_estandar}}</td>
       <td>{{item.categoria}}</td>
-      <td><a (click)="delete(item.id)" class="btn btn-danger">borrarsito</a></td>
+      <td><a [routerLink]="['actualizar-productos/', item.id]" class="btn btn-primary">Actualizar</a></td>
     </tr>
     </tbody>
     <tfoot>
     <tr>
-      <td colspan="4">
+      <td colspan="6">
         <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
       </td>
     </tr>

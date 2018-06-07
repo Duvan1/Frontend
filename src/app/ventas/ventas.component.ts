@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductServiceService } from '../services/product-service.service'
 import { Cliente } from '../models/cliente';
 import { Venta } from '../models/venta';
+import { Product } from '../models/product';
 import { DetallesVenta } from '../models/detallesventa';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthServiceService } from '../services/auth-service.service';
@@ -27,11 +28,11 @@ export class VentasComponent implements OnInit {
   public identify;
   public token;
   public clientExist = false;
-  public cedulaBusqueda = "";
+  public cedulaBusq;
   public reg = false;
   public status;
   public seleccion = ["credito","fiado"];
-  public tipo_pago;
+  public tipo_pago = "credito";
   public seleccionDias = [30,60,90];
   public dia;
 
@@ -69,20 +70,32 @@ export class VentasComponent implements OnInit {
     if (this.identify == null) {
       this.router.navigate(['/login']);
     }else{
-      this.cliente = new Cliente(null, '','','','');      
+      this.cliente = new Cliente(null, '','','',''); 
+      this.venta = new Venta(null, null,/*this.fecha*/this.tipo_pago,this.dia);     
       //alert(this.identify.sub+" "+this.fecha);
     }
   }
 
-  onKeydown(event) {
-   
+  cedulaBusqueda(event) {    
+    let x = event.toString();  
+    //console.log(x.length);
+    if (x.length < 7) {
+      this.cedulaBusq = "El documento es demasiado corto.";
+    }else if(x.length > 10){
+      this.cedulaBusq = "El documento es demasiado largo.";     
+    }else{
+      this.cedulaBusq = null;      
+    }
   }
 
   //registrar al cliente
   onSubmit(form){    
+    //console.log(JSON.stringify(this.cliente));
     //console.log(this.cliente.cedula);
+    
     if (!this.reg) {
-      if (this.cliente.cedula > 600000 ) {
+      if (this.cedulaBusq == null ) {
+        alert("entro")
         this._clienteServiceService.getCliente(this.cliente.cedula).subscribe(
           response => {
               console.log(response);
@@ -115,8 +128,6 @@ export class VentasComponent implements OnInit {
         );
 
     }
-    
-    
     
   }
 
@@ -241,11 +252,13 @@ export class VentasComponent implements OnInit {
     };
 
     detallesVenta = function (id) {
-      //[{"orderedItemCnt":1,"totalPrice":12,"itemId":16,"id":1,"item":{"id":16,"Empleado_cedula":123,"codigo":"1","nombre":"camisetas","description":"melas","cantidad":1,"precio_estandar":12,"descuento_paquete":0,"categoria":"melita","updated_at":"2018-05-15 20:03:22","created_at":"2018-05-15 20:03:22","user":null}}]
+      //[{"orderedItemCnt":1,"totalPrice":12,"itemId":16,"id":1,
+      //"item":{"id":16,"Empleado_cedula":123,"codigo":"1","nombre":"camisetas","description":"melas","cantidad":1,"precio_estandar":12,"descuento_paquete":0,"categoria":"melita","updated_at":"2018-05-15 20:03:22","created_at":"2018-05-15 20:03:22","user":null}}]
       //console.log(localStorage.getItem("order"));
       //let ordensirijilla = [];
       let ordensirijilla = JSON.parse(localStorage.getItem("order"));
-
+      let statusirijillo = true;
+      
       //console.log(JSON.stringify(ordensirijilla) + " "+id);
       /*var i;
       for (i = 0; i < ordensirijilla.length; i++) { 
@@ -253,14 +266,31 @@ export class VentasComponent implements OnInit {
       }*/
       for(var i in ordensirijilla) {
          console.log(ordensirijilla[i].orderedItemCnt+ " "+ordensirijilla[i].totalPrice);  // (o el campo que necesites)
+         let productirijillo = ordensirijilla[i].item;
+         productirijillo.cantidad = (productirijillo.cantidad - ordensirijilla[i].orderedItemCnt);
+         
          let detalles_venta = new DetallesVenta(id, ordensirijilla[i].itemId, ordensirijilla[i].orderedItemCnt, ordensirijilla[i].totalPrice);
          this._detallesVentaServiceService.registrar(this.token, detalles_venta).subscribe(
            response =>{
-             this.clearOrder();
+             console.log("uy no lo puedo creer!! "+JSON.stringify(productirijillo)+ " "+productirijillo.id);             
+             this._productServiceService.update(this.token, productirijillo, productirijillo.id).subscribe(
+               response=>{
+                 alert("estamos melos sisas estamos melos si si sisas");
+               },error=>{
+                 alert("esto es una tragedia loco :'v");
+               }
+             );
+             
            }, error=>{
-
+             statusirijillo = false;
            }
          );
+
+         if (statusirijillo) {
+           this.clearOrder();           
+         }else{
+           alert("ocurrio un error al registrar la venta.");
+         }
       }
     }
     

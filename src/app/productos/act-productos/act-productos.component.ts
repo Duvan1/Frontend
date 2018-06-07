@@ -24,11 +24,10 @@ export class ActProductosComponent implements OnInit {
   }
 
   ngOnInit() {
-  		this._route.params.subscribe(params =>{
-  		let id =+params['id'];
-  		this.getProduct(id); 	
-  
-	})
+		this._route.params.subscribe(params =>{
+		let id =+params['id'];
+		this.getProduct(id); 	  
+    })
   	this.product = new Product(100, 'this.identify.sub','','',1,1,1,'');
   }
   getProduct(id){

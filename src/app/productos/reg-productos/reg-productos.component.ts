@@ -49,7 +49,7 @@ export class RegProductosComponent implements OnInit {
 
   		},
   		error=> {
-  			console.log(<any>error);
+  			
         this.status = "error";
   		}
   		)
