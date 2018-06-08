@@ -109,22 +109,23 @@
           </form>
         </div>
         <div class="col-md-4">
+          <p>Mas ó menos vendido:</p>
           <form class="form-inline">
             <div class="form-group">
               <div class="input-group">
-                <label for="orden">Rol del usuario</label>
                 <select name="orden"  [(ngModel)]="orden" class="form-control selectpicker" id="orden" >
                   <option value="asc">Producto menos vendido</option>
                   <option value="desc">Top 10 mas vendidos</option>
                 </select>  
               </div>
             </div>
-          </form>              
+          </form>
         </div>
       </div>
-      <div class="col-xs-12">
-        <div class="center-block">
-          <button class="btn btn-primary" (click)="buscarFecha()">Buscar</button>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-primary btn-lg btn-block" (click)="buscarFecha()">Buscar</button>
         </div>
       </div>
       <!--        datapicker     -->
@@ -147,19 +148,48 @@
     <ng-template ngbTabContent>
       <div class="row">
         <div class="col-md-6">
-          <label for="orden">Ganancias: </label>
+          <label for="orden">Ganancias por: </label>
           <select name="consulta"  [(ngModel)]="consulta" class="form-control selectpicker" id="orden" >
             <option value="day">Hoy</option>
-            <option value="mont">Mes</option>
+            <option value="month">Mes</option>
             <option value="year">Año</option>
           </select> 
         </div>
         <div class="col-md-6">
-          <label for="year">año: </label>
-          <input id="year" type="number" min="1900" max="2099" step="1" value="2016" />
-          <label for="month">mes: </label>
-          <input id="month" type="number" min="1" max="12" step="1" value="1" />
+          <div class="form-group" *ngIf="consulta == 'year'">
+            <label for="year">año: </label>
+            <input class="form-control" id="year" type="number" min="1900" max="2099" step="1" [(ngModel)]="anioActual"/>            
+          </div>       
+          <div class="form-group" *ngIf="consulta == 'month'">
+            <label for="month">mes: </label>
+            <input class="form-control" id="month" type="number" min="1" max="12" step="1" [(ngModel)]="mesActual"/>
+          </div>   
         </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-primary btn-lg btn-block" (click)="buscarAnioMesDia()">Buscar</button>
+        </div>        
+      </div>
+      <br>
+      <div class="row" *ngIf="!dia_mes_anio">
+        <div class="col-md-12">
+          <p>Nada para mostrar</p>
+        </div>        
+      </div>
+      <br>
+      <div class="list-group list-group-flush small" *ngIf="dia_mes_anio">
+        <a class="list-group-item list-group-item-action" >
+          <div class="media" *ngFor="let item of dia_mes_anio">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/45x45" alt="">
+            <div class="media-body">
+              <p *ngIf="item.total_sales">Ganancias por ventas para esta consulta: <strong>{{item.total_sales}}</strong>.</p>
+              <p *ngIf="!item.total_sales">No se han obtenido ganancias por venta.</p>
+            </div>
+          </div>
+        </a>
+        <br>
       </div>
     </ng-template>
   </ngb-tab>

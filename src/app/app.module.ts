@@ -40,6 +40,7 @@ import { ActEmpleadosComponent } from './empleados/act-empleados/act-empleados.c
 import { EmpleadoFilterPipe } from './pipes/empleado-filter.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { VentasComponent } from './ventas/ventas.component';
+import { TablaVentasComponent } from './ventas/tabla-ventas/tabla-ventas.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { VentasComponent } from './ventas/ventas.component';
     RegEmpleadosComponent,
     ActEmpleadosComponent,
     EmpleadoFilterPipe,
-    VentasComponent
+    VentasComponent,
+    TablaVentasComponent
   ],
   imports: [
     BrowserModule,

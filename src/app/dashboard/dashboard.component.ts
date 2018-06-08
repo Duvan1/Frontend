@@ -24,7 +24,12 @@ export class DashboardComponent implements OnInit {
   public model1;
   public products_fechas_flat=false;
   public orden = 'desc';
-  public consulta = 'day'; 
+  public consulta = 'day';
+  public anioActual;
+  public mesActual;
+  public fecha = new Date();
+  public hoy;
+  public dia_mes_anio;
 
   constructor(
     private _authServiceService: AuthServiceService,
@@ -33,7 +38,13 @@ export class DashboardComponent implements OnInit {
     private _ventaServiceService:VentaServiceService,
     private route: ActivatedRoute,
     private router: Router) {
-    
+    //var fecha = new Date();
+    this.hoy = this.fecha.getFullYear().toString()+"-"+(this.fecha.getMonth()+1).toString()+"-"+this.fecha.getDate().toString()
+    this.anioActual = this.fecha.getFullYear();
+    this.mesActual = (this.fecha.getMonth()+1);
+    //alert('La fecha actual es: '+this.hoy); 
+    //alert(" dia actual: "+this.fecha.getDate().toString())
+    //alert('El mes actual es: '+this.mesActual);    
   }
 
   ngOnInit() { 
@@ -79,6 +90,28 @@ export class DashboardComponent implements OnInit {
      );
     }
     
+  }
+
+  buscarAnioMesDia(){
+    let yearMonthDay;
+    console.log(this.consulta);
+    if (this.consulta == 'month') {
+      // code...
+      yearMonthDay = this.mesActual.toString();
+    }else if(this.consulta == 'year'){
+      yearMonthDay = this.anioActual.toString();
+    }else{
+      yearMonthDay = this.hoy;
+    }
+    this._ventaServiceService.ganancias(this.consulta, yearMonthDay).subscribe(
+      response=>{
+        console.log(response);
+        this.dia_mes_anio = response.ganancias;
+        alert("melito ompa");
+      },error=>{
+        console.log(<any>error)
+      }
+    )    
   }
 
 
