@@ -21,4 +21,8 @@ export class VentaServiceService {
   	return this._http.post('http://laravel-api.test/api/venta', params, {headers:headers});
   }
 
+  getVentas(): Observable<any>{
+    return this.http.get("http://laravel-api.test/api/venta").map((response:Response)=> response.json());    
+  }
+
 }

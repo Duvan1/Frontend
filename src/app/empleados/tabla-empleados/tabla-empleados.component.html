@@ -1,61 +1,58 @@
-<div class="col-md-12">
- 
-  <table
-    class="table table-striped"
-    [mfData]="data | empleadoFilter : filterQuery"
-    #mf="mfDataTable"
-    [mfRowsOnPage]="rowsOnPage"
-    [(mfSortBy)]="sortBy"
-    [(mfSortOrder)]="sortOrder"
-  >
-    <thead class="thead-dark">
+<table class="table">
+  <thead class="thead-dark">
     <tr>
-      <th scope="col">
-        <mfDefaultSorter by="cedula">Cedula</mfDefaultSorter>
+      <th scope="col" (click)="sort('cedula')">
+        Cedula
+        <span class="fa fa-sort" *ngIf="key =='cedula'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+      <th scope="col" (click)="sort('Nombre')">
+        Nombre
+        <span class="fa fa-sort" *ngIf="key =='Nombre'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+      <th scope="col" (click)="sort('Apellido')">
+        Apellido
+        <span class="fa fa-sort" *ngIf="key =='Apellido'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+      <th scope="col" (click)="sort('Cargo')">
+        Cargo
+        <span class="fa fa-sort" *ngIf="key =='Cargo'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+       <th scope="col" (click)="sort('correo')">
+        Correo
+        <span class="fa fa-sort" *ngIf="key =='correo'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+      <th scope="col" (click)="sort('telefono')">
+        Telefono
+        <span class="fa fa-sort" *ngIf="key =='telefono'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
       </th>
       <th scope="col">
-        <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
-      </th>
-      <th scope="col">
-        <mfDefaultSorter by="apellido">Apellido</mfDefaultSorter>
-      </th>
-      <th scope="col">
-        <mfDefaultSorter by="cargo">cargo</mfDefaultSorter>
-      </th>
-       <th scope="col">
-        <mfDefaultSorter by="correo">Correo</mfDefaultSorter>
-      </th>
-      <th scope="col">
-        <mfDefaultSorter by="telefono">Telefono</mfDefaultSorter>
-      </th>
-      <th scope="col">
-        <mfDefaultSorter by="telefono">Acciones</mfDefaultSorter>
+        Acciones
       </th>
     </tr>
-    <tr>
+     <tr>
       <th colspan="7">
-        Buscar por nombre:
-        <input class="form-control" [(ngModel)]="filterQuery"/>
+        Buscar:
+        <input class="form-control" [(ngModel)]="filter"/>
       </th>
     </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of mf.data">
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p };">
       <td>{{item.cedula}}</td>
       <td>{{item.Nombre}}</td>
       <td class="text-right">{{item.Apellido}}</td>
-      <td>{{item.cargo }}</td>
+      <td>{{item.Cargo }}</td>
       <td>{{item.correo }}</td>
       <td>{{item.telefono }}</td>
       <td><a [routerLink]="['actualizar-empleado/', item.cedula]" class="btn btn-primary">Actualizar</a></td>
     </tr>
-    </tbody>
-    <tfoot>
+  </tbody>
+  <tfoot>
     <tr>
       <td colspan="7">
-        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </td>
     </tr>
     </tfoot>
-  </table>
-</div>
+</table>
+

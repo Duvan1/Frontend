@@ -20,6 +20,9 @@ export class TablaProductosComponent implements OnInit {
   public sortOrder = "asc";
   public token;
   private _productService: ProductServiceService;
+  public key: string = 'name';
+  public reverse: boolean = false;
+  public p: number = 1;
   
 
 

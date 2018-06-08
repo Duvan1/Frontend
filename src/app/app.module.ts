@@ -8,8 +8,11 @@ import { HttpModule } from '@angular/http';
 import { DataTableModule} from "angular2-datatable";
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
-import {FlashMessagesModule} from 'angular2-flash-messages';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import { FlashMessagesModule} from 'angular2-flash-messages';
+import { FlashMessagesService} from 'angular2-flash-messages';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { NgxPaginationModule} from 'ngx-pagination';
 
 import { ProductServiceService } from './services/product-service.service';
 import { EmpleadoServiceService } from './services/empleado-service.service';
@@ -69,7 +72,10 @@ import { VentasComponent } from './ventas/ventas.component';
     DataTableModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
+    NgxPaginationModule
   ],
   providers: [
       ProductServiceService,

@@ -15,6 +15,14 @@ export class ProductServiceService {
   	return this.http.get("http://laravel-api.test/api/products").map((response:Response)=> response.json());  	
   }
 
+  productosMasVendidos(): Observable<any>{
+    return this.http.get("http://laravel-api.test/api/mas-vendido").map((response:Response)=> response.json());    
+  }
+
+  topTenRangoFechas(f1,f2,orden): Observable<any>{
+    return this.http.get("http://laravel-api.test/api/mas-vendido-fechas/"+f1+"/"+f2+"/"+orden).map((response:Response)=> response.json());    
+  }
+
   registrar(token, product:Product): Observable<any>{
   	let json = JSON.stringify(product);
   	let params = "json="+json;

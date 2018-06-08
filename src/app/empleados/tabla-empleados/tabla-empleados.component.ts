@@ -13,9 +13,18 @@ export class TablaEmpleadosComponent implements OnInit {
 
   public data: any[];
   public filterQuery = "";
-  public rowsOnPage = 5;
-  public sortBy = "email";
+  public rowsOnPage = 7;
+  public sortBy = "cedula";
   public sortOrder = "asc";
+
+  //sorting
+  key: string = 'name';
+  reverse: boolean = false;
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+  p: number = 1;
  
   constructor(
     private empleadoServiceService:EmpleadoServiceService,

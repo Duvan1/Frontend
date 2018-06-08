@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService }from '../services/auth-service.service';
+import { EmpleadoServiceService }from '../services/empleado-service.service';
+import { ProductServiceService }from '../services/product-service.service';
+import { VentaServiceService }from '../services/venta-service.service';
 import { ActivatedRoute, Router } from "@angular/router/";
+
 
 
 
@@ -11,15 +15,70 @@ import { ActivatedRoute, Router } from "@angular/router/";
 })
 export class DashboardComponent implements OnInit {
   public identify :any;
+  public products;
+  public cant_products;
+  public cant_emp;
+  public cant_ventas;
+  public products_fechas;
+  public model;
+  public model1;
+  public products_fechas_flat=false;
+  public orden = 'desc';
+  public consulta = 'day'; 
 
   constructor(
     private _authServiceService: AuthServiceService,
+    private _productServiceService: ProductServiceService,
+    private _empleadoServiceService:EmpleadoServiceService,
+    private _ventaServiceService:VentaServiceService,
     private route: ActivatedRoute,
     private router: Router) {
     
   }
 
-  ngOnInit() {   
+  ngOnInit() { 
+    //alert("model1: "+this.model1+" "+"model: "+this.model)
+    this._ventaServiceService.getVentas().subscribe(
+      data=>{
+        this.cant_ventas = data.venta.length;
+      });
+    this._empleadoServiceService.getEmpleados().subscribe(
+      data=>{
+        this.cant_emp = data.empleado.length;
+      }
+    );
+    this._productServiceService.getProduts().subscribe(
+      response=>{
+        this.cant_products = response.productos.length;
+      }
+    );
+    this._productServiceService.productosMasVendidos().subscribe(
+      response =>{
+        //console.log(response);
+        this.products = response.productos;
+      }
+     );
+  }
+
+  buscarFecha(){
+    console.log("buscando...")
+    if (this.model && this.model1) {
+      let fechaIni = JSON.stringify(this.model.year)+"-"+JSON.stringify(this.model.month)+"-"+JSON.stringify(this.model.day);
+      let fechaFin = JSON.stringify(this.model1.year)+"-"+JSON.stringify(this.model1.month)+"-"+JSON.stringify(this.model1.day);
+      console.log(fechaIni+" "+fechaFin);
+      this._productServiceService.topTenRangoFechas(fechaIni, fechaFin, this.orden).subscribe(
+      response =>{
+        console.log(response);
+        console.log(fechaIni+" "+fechaFin);
+        this.products_fechas = response.productos;
+        this.products_fechas_flat = true;
+        //alert("entro")
+      },error=>{
+        console.log(<any>error);
+      }
+     );
+    }
+    
   }
 
 

@@ -9,7 +9,7 @@
         <div class="card-body-icon">
           <i class="fa fa-fw fa-user"></i>
         </div>
-        <div class="mr-5">26 Empleados registrados!</div>
+        <div class="mr-5">{{cant_emp}} Empleados registrados!</div>
       </div>
       <a class="card-footer text-white clearfix small z-1" href="#">
         <span class="float-left">Ver más</span>
@@ -25,7 +25,7 @@
         <div class="card-body-icon">
           <i class="fa fa-fw fa-list"></i>
         </div>
-        <div class="mr-5">131 Productos!</div>
+        <div class="mr-5">{{cant_products}} Productos!</div>
       </div>
       <a class="card-footer text-white clearfix small z-1" href="#">
         <span class="float-left">Ver más</span>
@@ -41,7 +41,7 @@
         <div class="card-body-icon">
           <i class="fa fa-fw fa-shopping-cart"></i>
         </div>
-        <div class="mr-5">123 Ventas!</div>
+        <div class="mr-5">{{cant_ventas}} Ventas!</div>
       </div>
       <a class="card-footer text-white clearfix small z-1" href="#">
         <span class="float-left">Ver más</span>
@@ -53,59 +53,124 @@
   </div>
 </div>
 
-<div class="row">
-  <!-- top vendedores -->
-  <div class="col-lg-4">
-    <!-- Example Notifications Card-->
-          <div class="card mb-3">
-            <div class="card-header">
-              <i class="fa fa-bell-o"></i>Productos que mas venden</div>
-            <div class="list-group list-group-flush small">
-              <a class="list-group-item list-group-item-action" href="#">
-                <div class="media">
-                  <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/45x45" alt="">
-                  <div class="media-body">
-                    <strong>Tela1 </strong>Cantidad: 
-                    <strong>23</strong>.
-                    <div class="text-muted smaller">Ultima venta: hoy 5:43 PM - 5m ago</div>
-                  </div>
-                </div>
-              </a>
-              <a class="list-group-item list-group-item-action" href="#">
-                <div class="media">
-                  <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/45x45" alt="">
-                  <div class="media-body">
-                    <strong>Tela2</strong>Cantidad:
-                    <strong>22</strong>.
-                    <div class="text-muted smaller">Today at 4:37 PM - 1hr ago</div>
-                  </div>
-                </div>
-              </a>
-              <a class="list-group-item list-group-item-action" href="#">
-                <div class="media">
-                  <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/45x45" alt="">
-                  <div class="media-body">
-                    <strong>Tela3</strong>Cantidad:
-                    <strong>21</strong>.
-                    <div class="text-muted smaller">Today at 4:31 PM - 1hr ago</div>
-                  </div>
-                </div>
-              </a>
-              <a class="list-group-item list-group-item-action" href="#">
-                <div class="media">
-                  <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/45x45" alt="">
-                  <div class="media-body">
-                    <i class="fa fa-code-fork"></i>
-                    <strong>Telas4</strong>Cantidad:
-                    <strong>13</strong>
-                    <div class="text-muted smaller">Today at 3:54 PM - 2hrs ago</div>
-                  </div>
-                </div>
-              </a>
-              <a class="list-group-item list-group-item-action" href="#">View all activity...</a>
+<ngb-tabset>
+  <ngb-tab title="Productos más vendidos.">
+    <ng-template ngbTabContent>
+      <div class="list-group list-group-flush small">
+        <a class="list-group-item list-group-item-action" >
+          <div class="media" *ngFor="let item of products">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/45x45" alt="">
+            <div class="media-body">
+              <strong>{{item.nombre}} </strong>Cantidad: <strong>{{item.cant_sales}}</strong>.
+              Se vendio un total de: <strong>{{item.total_sales}}</strong>.
+              <div class="text-muted smaller">Ultima venta: {{item.fecha}}</div>
             </div>
           </div>
-  </div>
+        </a>
+        <br>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Rango de fechas">
+    <ng-template ngbTabContent>
+      <!--        datapicker     -->
+      <div class="row">
+        <div class="col-md-4">
+          <p>Fecha inicio</p>
+          <form class="form-inline">
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                  name="dp" [(ngModel)]="model" ngbDatepicker #d1="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                    <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-4">
+          <p>Fecha fin</p>
+          <form class="form-inline">
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" [(ngModel)]="model1" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4">
+          <form class="form-inline">
+            <div class="form-group">
+              <div class="input-group">
+                <label for="orden">Rol del usuario</label>
+                <select name="orden"  [(ngModel)]="orden" class="form-control selectpicker" id="orden" >
+                  <option value="asc">Producto menos vendido</option>
+                  <option value="desc">Top 10 mas vendidos</option>
+                </select>  
+              </div>
+            </div>
+          </form>              
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="center-block">
+          <button class="btn btn-primary" (click)="buscarFecha()">Buscar</button>
+        </div>
+      </div>
+      <!--        datapicker     -->
+      <div class="list-group list-group-flush small" *ngIf="products_fechas_flat">
+        <a class="list-group-item list-group-item-action" >
+          <div class="media" *ngFor="let item of products_fechas">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/45x45" alt="">
+            <div class="media-body">
+              <strong>{{item.nombre}} </strong>Cantidad: <strong>{{item.cant_sales}}</strong>.<br>
+              Se vendio un total de: <strong>{{item.total_sales}}</strong>.
+              <div class="text-muted smaller">Ultima venta: {{item.fecha}}</div>
+            </div>
+          </div>
+        </a>
+        <br>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Ganancias.">
+    <ng-template ngbTabContent>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="orden">Ganancias: </label>
+          <select name="consulta"  [(ngModel)]="consulta" class="form-control selectpicker" id="orden" >
+            <option value="day">Hoy</option>
+            <option value="mont">Mes</option>
+            <option value="year">Año</option>
+          </select> 
+        </div>
+        <div class="col-md-6">
+          <label for="year">año: </label>
+          <input id="year" type="number" min="1900" max="2099" step="1" value="2016" />
+          <label for="month">mes: </label>
+          <input id="month" type="number" min="1" max="12" step="1" value="1" />
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+
+  
+
+
+<br>
+
+<div class="row">
   <!-- estadisticas -->
   <div class="col-lg-8">
     <div class="card mb-3">

@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!--<div class="col-md-12">
   
   <table
     class="table table-striped"
@@ -54,4 +54,57 @@
     </tr>
     </tfoot>
   </table>
-</div>
+</div>-->
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" (click)="sort('codigo')">
+        Codigo
+        <span class="fa fa-sort" *ngIf="key =='codigo'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+      <th scope="col" (click)="sort('nombre')">
+        Nombre
+        <span class="fa fa-sort" *ngIf="key =='nombre'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+      <th scope="col" (click)="sort('cantidad')">
+        Cantidad
+        <span class="fa fa-sort" *ngIf="key =='cantidad'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+       <th scope="col" (click)="sort('precio_estandar')">
+        Precio
+        <span class="fa fa-sort" *ngIf="key =='precio_estandar'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+      <th scope="col" (click)="sort('categoria')">
+        Categoria
+        <span class="fa fa-sort" *ngIf="key =='categoria'" [ngClass]="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span>
+      </th>
+      <th scope="col">
+        Acciones
+      </th>
+    </tr>
+     <tr>
+      <th colspan="7">
+        Buscar:
+        <input class="form-control" [(ngModel)]="filter"/>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 10, currentPage: p };">
+      <td>{{item.codigo}}</td>
+      <td>{{item.nombre}}</td>
+      <td>{{item.cantidad}}</td>
+      <td>{{item.precio_estandar}}</td>
+      <td>{{item.categoria}}</td>
+      <td><a [routerLink]="['actualizar-productos/', item.id]" class="btn btn-primary">Actualizar</a></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="7">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </td>
+    </tr>
+    </tfoot>
+</table>
+

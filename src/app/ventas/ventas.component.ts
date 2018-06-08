@@ -35,6 +35,9 @@ export class VentasComponent implements OnInit {
   public tipo_pago = "credito";
   public seleccionDias = [30,60,90];
   public dia;
+  public key: string = 'name';
+  public reverse: boolean = false;
+  public p: number = 1;
 
   constructor(
     private _authServiceService: AuthServiceService,

@@ -4,12 +4,30 @@
       <div class="col-sm-6">
         <div class="well">
           <div class="box">
-            <div class="text-info">Lista de productos {{ fecha | date:'dd-MM-yyyy'}}</div>
+            <div class="text-info">
+              <input class="form-control" placeholder="Buscar..." [(ngModel)]="filter"/>
+            </div>
             <hr>
-            <div *ngFor="let p of products">
+            <div >
+              <table class="table">
+                <tr *ngFor="let p of products | filter:filter | paginate: { itemsPerPage: 3, currentPage: p };">
+                  <button class="btn btn-primary btn-lg btn-block" (click)="add(p)">
+                    {{p.nombre}} - <i class="fa fa-money" aria-hidden="true"></i>{{p.precio_estandar}}<br>
+                    Cantidad: {{p.cantidad}}
+                  </button>                 
+                </tr>
+                <tfoot>
+                  <tr>
+                    <td>
+                      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+              <!--
             	<button class="btn btn-primary btn-lg btn-block" (click)="add(p)">
             		{{p.nombre}} - <i class="fa fa-money" aria-hidden="true"></i>{{p.precio_estandar}} - Cantidad: {{p.cantidad}}
-            	</button>
+            	</button>-->
 	          </div>
 	        </div>
         </div>
