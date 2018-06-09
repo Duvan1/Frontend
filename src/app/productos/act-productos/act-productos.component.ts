@@ -21,14 +21,21 @@ export class ActProductosComponent implements OnInit {
   	private _AuthService: AuthServiceService,
   	) { 
   		this.token = this._AuthService.getToken();
+      this.identify= this._AuthService.getIdentify();
   }
 
   ngOnInit() {
-		this._route.params.subscribe(params =>{
-		let id =+params['id'];
-		this.getProduct(id); 	  
-    })
-  	this.product = new Product(100, 'this.identify.sub','','',1,1,1,'');
+    if (this.identify == null) {
+      this._router.navigate(['/login']);
+    }else if(this.identify.rol == 'vendedor'){
+      this._router.navigate(['/reg-ventas']);
+    }else{    
+  		this._route.params.subscribe(params =>{
+  		let id =+params['id'];
+  		this.getProduct(id); 	  
+      })
+    	this.product = new Product(100, 'this.identify.sub','','',1,1,1,'');
+    }
   }
   getProduct(id){
  		this._ProductServiceService.getProdut(id).subscribe(

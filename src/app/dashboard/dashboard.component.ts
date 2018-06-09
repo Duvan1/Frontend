@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   public fecha = new Date();
   public hoy;
   public dia_mes_anio;
+  public token;
 
   constructor(
     private _authServiceService: AuthServiceService,
@@ -42,45 +43,49 @@ export class DashboardComponent implements OnInit {
     this.hoy = this.fecha.getFullYear().toString()+"-"+(this.fecha.getMonth()+1).toString()+"-"+this.fecha.getDate().toString()
     this.anioActual = this.fecha.getFullYear();
     this.mesActual = (this.fecha.getMonth()+1);
-    //alert('La fecha actual es: '+this.hoy); 
-    //alert(" dia actual: "+this.fecha.getDate().toString())
-    //alert('El mes actual es: '+this.mesActual);    
+    this.identify = _authServiceService.getIdentify();
+    this.token = _authServiceService.getToken();   
   }
 
   ngOnInit() { 
-    //alert("model1: "+this.model1+" "+"model: "+this.model)
-    this._ventaServiceService.getVentas().subscribe(
-      data=>{
-        this.cant_ventas = data.venta.length;
-      });
-    this._empleadoServiceService.getEmpleados().subscribe(
-      data=>{
-        this.cant_emp = data.empleado.length;
-      }
-    );
-    this._productServiceService.getProduts().subscribe(
-      response=>{
-        this.cant_products = response.productos.length;
-      }
-    );
-    this._productServiceService.productosMasVendidos().subscribe(
-      response =>{
-        //console.log(response);
-        this.products = response.productos;
-      }
-     );
+    if (this.identify == null) {
+      this.router.navigate(['/login']);
+    }else if(this.identify.rol == 'vendedor'){
+      this.router.navigate(['/reg-ventas']);
+    }else if(this.identify.rol == 'analista de ventas'){
+      this.router.navigate(['productos']);
+    }else{
+      //alert("model1: "+this.model1+" "+"model: "+this.model)
+      this._ventaServiceService.getVentas().subscribe(
+        data=>{
+          this.cant_ventas = data.venta.length;
+        });
+      this._empleadoServiceService.getEmpleados().subscribe(
+        data=>{
+          this.cant_emp = data.empleado.length;
+        }
+      );
+      this._productServiceService.getProduts().subscribe(
+        response=>{
+          this.cant_products = response.productos.length;
+        }
+      );
+      this._productServiceService.productosMasVendidos().subscribe(
+        response =>{
+          this.products = response.productos;
+        }
+       );
+    }
+    
   }
 
   buscarFecha(){
-    console.log("buscando...")
     if (this.model && this.model1) {
       let fechaIni = JSON.stringify(this.model.year)+"-"+JSON.stringify(this.model.month)+"-"+JSON.stringify(this.model.day);
       let fechaFin = JSON.stringify(this.model1.year)+"-"+JSON.stringify(this.model1.month)+"-"+JSON.stringify(this.model1.day);
-      console.log(fechaIni+" "+fechaFin);
+      
       this._productServiceService.topTenRangoFechas(fechaIni, fechaFin, this.orden).subscribe(
       response =>{
-        console.log(response);
-        console.log(fechaIni+" "+fechaFin);
         this.products_fechas = response.productos;
         this.products_fechas_flat = true;
         //alert("entro")
@@ -94,7 +99,6 @@ export class DashboardComponent implements OnInit {
 
   buscarAnioMesDia(){
     let yearMonthDay;
-    console.log(this.consulta);
     if (this.consulta == 'month') {
       // code...
       yearMonthDay = this.mesActual.toString();
@@ -105,7 +109,6 @@ export class DashboardComponent implements OnInit {
     }
     this._ventaServiceService.ganancias(this.consulta, yearMonthDay).subscribe(
       response=>{
-        console.log(response);
         this.dia_mes_anio = response.ganancias;
         alert("melito ompa");
       },error=>{

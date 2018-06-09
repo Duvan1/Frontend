@@ -1,3 +1,108 @@
-<p>
-  tabla-ventas works!
-</p>
+<div class="container">
+	<table class="table">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col" >
+	        ID
+	        
+	      </th>
+	      <th scope="col" >
+	        Comprado por:
+	        
+	      </th>
+	      <th scope="col">
+	        Vendido por:
+	        
+	      </th>
+	      <th scope="col" >
+	        El día;
+	        
+	      </th>
+	    </tr>
+	     <tr>
+	      <th colspan="4">
+	        Buscar:
+	        <input class="form-control" [(ngModel)]="filter"/>
+	      </th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr *ngFor="let item of ventas | filter:filter | paginate: { itemsPerPage: 5, currentPage: p };" (click)="detalles(item.id)">
+	      <td>{{item.id}}</td>
+	      <td>{{item.clientes_cedula}}</td>
+	      <td >{{item.Empleado_cedula}}</td>
+	      <td>{{item.fecha }}</td>
+	    </tr>
+	  </tbody>
+	  <tfoot>
+	    <tr>
+	      <td colspan="7">
+	        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+	      </td>
+	    </tr>
+	    </tfoot>
+	</table>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+
+	<div class="row ">
+		<div class="col-md-8">
+			<p class="text-left">
+				<strong>Vendido a:</strong><br>
+				{{cliente.nombre}} {{cliente.apellidos}}<br>
+				<strong>Documento:</strong><br>
+				{{cliente.cedula}} <br>
+				<strong>Dirección:</strong><br>
+				{{cliente.direccion}} <br>
+				<strong>telefono:</strong><br>
+				{{cliente.telefono}}
+			</p>
+		</div>
+		<div class="col-md-4">
+			<p class="text-right">
+				<strong>Vendedor:</strong><br>
+				{{empleado.Nombre}} {{empleado.Apellido}}<br>
+				<strong>Cargo:</strong><br>
+				{{empleado.Cargo}}<br>
+				<strong>Fecha de la venta:</strong><br>
+				{{fecha}}<br>
+				
+			</p>
+		</div>
+	</div>
+
+	<ul class="list-group mb-3">
+		<li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let item of products">
+			<div>
+				<h6 class="my-0">{{item.nombre}}</h6>
+				<small class="text-muted">{{item.desc}}</small>
+			</div>
+			<span class="text-muted">{{item.cant}} items</span>
+			<span class="text-muted">${{item.tot}}</span>
+		</li>
+	</ul>
+	<div >
+		<div class="row">
+			<div class="col-md-4">
+				<p class="text-left">
+					<strong>Tipo de pago:</strong><br>
+					{{tipo_pago}}<br>
+					<strong>Plazo para pagar:</strong><br>
+					{{dias}}
+				</p>				
+			</div>
+			<div class="col-md-8">
+				<p class="text-right">
+					<strong>Cantidad:</strong><br>
+					{{cantidad}}<br>
+					<strong>Total:</strong><br>
+					{{total}}
+				</p>			
+				
+			</div>	
+		</div>		
+	</div>
+	
+</div>
+
+		

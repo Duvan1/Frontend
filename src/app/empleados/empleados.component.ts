@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from '../services/auth-service.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 
 @Component({
   selector: 'app-empleados',
@@ -6,10 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./empleados.component.css']
 })
 export class EmpleadosComponent implements OnInit {
+  public identify;
+  public token;
 
-  constructor() { }
+  constructor(private router:Router,
+    private _authServiceService: AuthServiceService) { 
+    this.identify = _authServiceService.getIdentify();
+    //this.product.Empleado_cedula = this.identify.sub;
+    this.token = _authServiceService.getToken();
+  }
 
   ngOnInit() {
+    if (this.identify == null) {
+      this.router.navigate(['/login']);
+    }else if(this.identify.rol == 'vendedor'){
+      this.router.navigate(['/reg-ventas']);
+    }else if(this.identify.rol == 'analista de ventas'){
+      this.router.navigate(['productos']);
+    }
   }
 
   // lineChart

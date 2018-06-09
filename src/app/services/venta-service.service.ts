@@ -29,4 +29,8 @@ export class VentaServiceService {
     return this.http.get("http://laravel-api.test/api/ganancias/"+tipo+"/"+value).map((response:Response)=> response.json());    
   }
 
+  detalles(id_venta): Observable<any>{
+    return this.http.get("http://laravel-api.test/api/detalles_de_venta/"+id_venta).map((response:Response)=> response.json());    
+  }
+
 }

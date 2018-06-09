@@ -50,8 +50,17 @@ export class LoginComponent implements OnInit {
                 console.log(<any>error);
               }
             );
+            let ruta = this._authServiceService.getIdentify();
+            //console.log(ruta.rol)
+            if (ruta.rol == 'administrador') {
+              this.router.navigate(['/']);
+            }else if (ruta.rol == 'vendedor') {
+              this.router.navigate(['reg-ventas']);
+            }else if (ruta.rol == 'analista de ventas') {
+              this.router.navigate(['productos']);
+            }
             
-            this.router.navigate(['/']);
+            
           }else{
           this.status= 'error';
           }        

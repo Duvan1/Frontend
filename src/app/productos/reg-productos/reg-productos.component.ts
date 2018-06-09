@@ -31,7 +31,9 @@ export class RegProductosComponent implements OnInit {
   ngOnInit() {
   	if (this.identify == null) {
   		this.router.navigate(['/login']);
-  	}else{
+  	}else if(this.identify.rol == 'vendedor'){
+      this.router.navigate(['/reg-ventas']);
+    }else{
   		this.product = new Product(100000, this.identify.sub,'','',1,1,1,'');
   	}
   }

@@ -11,6 +11,7 @@ import { VentaServiceService } from '../services/venta-service.service';
 import { DetallesVentaServiceService } from '../services/detalles-venta-service.service';
 
 
+
 @Component({
   selector: 'app-ventas',
   templateUrl: './ventas.component.html',
@@ -72,6 +73,8 @@ export class VentasComponent implements OnInit {
   ngOnInit() {
     if (this.identify == null) {
       this.router.navigate(['/login']);
+    }else if(this.identify.rol == 'analista de ventas'){
+      this.router.navigate(['productos']);
     }else{
       this.cliente = new Cliente(null, '','','',''); 
       this.venta = new Venta(null, null,/*this.fecha*/this.tipo_pago,this.dia);     

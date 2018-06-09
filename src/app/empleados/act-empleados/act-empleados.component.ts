@@ -22,16 +22,25 @@ export class ActEmpleadosComponent implements OnInit {
   	private _router: Router,
   	private _AuthService: AuthServiceService,
   	) {
-  	this.token = this._AuthService.getToken();
+  	  this.token = this._AuthService.getToken();
+      this.identify = _AuthService.getIdentify();
   	}
 
   ngOnInit() {
-  	this._route.params.subscribe(params =>{
-			let id =+params['id'];
-			this.getEmpleado(id); 
-			this.actualizar = "Actualizar";
-    })
-    console.log(this.empleado);
+    if (this.identify == null) {
+      this._router.navigate(['/login']);
+    }else if(this.identify.rol == 'vendedor'){
+      this._router.navigate(['/reg-ventas']);
+    }else if(this.identify.rol == 'analista de ventas'){
+      this._router.navigate(['productos']);
+    }else{
+      this._route.params.subscribe(params =>{
+      let id =+params['id'];
+      this.getEmpleado(id); 
+      this.actualizar = "Actualizar";
+      });
+    }
+  	
   }
 
   getEmpleado(id){

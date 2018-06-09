@@ -10,6 +10,7 @@ import { RegEmpleadosComponent } from './empleados/reg-empleados/reg-empleados.c
 import { ActProductosComponent } from './productos/act-productos/act-productos.component';
 import { ActEmpleadosComponent } from './empleados/act-empleados/act-empleados.component';
 import { VentasComponent } from './ventas/ventas.component';
+import { TablaVentasComponent } from './ventas/tabla-ventas/tabla-ventas.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   	{path: 'logout/:sure', component: LoginComponent},
   	{path: 'empleados', component: EmpleadosComponent},
   	{path: 'productos', component: ProductosComponent},
+    {path: 'ventas', component: TablaVentasComponent},
   	{path: 'registrar-productos', component: RegProductosComponent},
     {path: 'registrar-empleado', component: RegEmpleadosComponent},
     {path: 'reg-ventas', component: VentasComponent},

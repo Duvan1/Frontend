@@ -39,8 +39,12 @@ export class RegEmpleadosComponent implements OnInit {
 
   ngOnInit() {
   	if (this.identify == null) {
-  		this.router.navigate(['/login']);
-  	}else{
+      this.router.navigate(['/login']);
+    }else if(this.identify.rol == 'vendedor'){
+      this.router.navigate(['/reg-ventas']);
+    }else if(this.identify.rol == 'analista de ventas'){
+      this.router.navigate(['productos']);
+    }else{
   		this.empleado = new Empleado(null, null, null, "vendedor",null, null, null, true);
   		this.user = new User(null, "vendedor", null, null, null);
   	}
