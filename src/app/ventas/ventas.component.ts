@@ -62,7 +62,7 @@ export class VentasComponent implements OnInit {
           // code...
           setTimeout(()=> {
           	this.products = data.productos
-          console.log(this.products);
+          //console.log(this.products);
           }, 2000);
         }
         
@@ -101,10 +101,10 @@ export class VentasComponent implements OnInit {
     
     if (!this.reg) {
       if (this.cedulaBusq == null ) {
-        alert("entro")
+        //alert("entro")
         this._clienteServiceService.getCliente(this.cliente.cedula).subscribe(
           response => {
-              console.log(response);
+              //console.log(response);
               this.clientExist = false;
               this.cliente = response.cliente;
               this.status = response.status;
@@ -112,7 +112,7 @@ export class VentasComponent implements OnInit {
           error=> {
             console.log(<any>error);
             this.status = "error";
-            console.log(JSON.stringify(this.cliente));
+            //console.log(JSON.stringify(this.cliente));
             this.clientExist = true;
             this.reg = true;
             //this.cliente = new Cliente(null, '','','','');
@@ -120,9 +120,9 @@ export class VentasComponent implements OnInit {
         )
       }
     }else{
-        console.log(this.token);
+       // console.log(this.token);
         this.reg = false;
-        console.log("----------------------------------- "+JSON.stringify(this.cliente));
+        //console.log("----------------------------------- "+JSON.stringify(this.cliente));
         this.clientExist= false;
         this._clienteServiceService.registrar(this.token, this.cliente).subscribe(
           response=>{
@@ -169,7 +169,7 @@ export class VentasComponent implements OnInit {
     var cartItems = this.order.filter((element) => {
   	   return (element.itemId == item.id);
   	});
-    console.log("cartItems "+JSON.stringify(cartItems));
+    //console.log("cartItems "+JSON.stringify(cartItems));
 
      if(cartItems.length > 0  && this.order){
         cartItems[0].orderedItemCnt = ++ cartItems[0].orderedItemCnt; 
@@ -205,7 +205,7 @@ export class VentasComponent implements OnInit {
     };
 
     addItem = function(item, index) {     
-      console.log(JSON.stringify(item) + " "+index);
+      //console.log(JSON.stringify(item) + " "+index);
       item.orderedItemCnt = ++ item.orderedItemCnt; 
       item.totalPrice = item.item.precio_estandar * item.orderedItemCnt;
       localStorage.setItem("order", JSON.stringify(this.order));
@@ -236,21 +236,24 @@ export class VentasComponent implements OnInit {
       if (this.cliente.cedula == null || this.cliente.nombre == "" || this.cliente.apellidos == "" || this.cliente.direccion == "" || this.cliente.telefono == "") {
         alert("por favor llene todos los campos del cliente.")
       }else{              
-        console.log(JSON.stringify(this.order));
+        //console.log(JSON.stringify(this.order));
         if (this.tipo_pago == "credito") {
           this.dia = 0;
         }
         this.venta = new Venta(this.cliente.cedula, this.identify.sub,/*this.fecha*/this.tipo_pago,this.dia);
+        //console.log(JSON.stringify(this.venta));
         //alert(JSON.stringify(this.venta));
-        
+
+                
         this._ventaServiceService.registrar(this.token, this.venta).subscribe(
           response => {
-            //console.log(response);
+            console.log(response);
             this.detallesVenta(response.venta.id); 
           },error => {
             alert(<any>error);
           }
         );
+
 
         //this.clearOrder();
       }
@@ -271,19 +274,19 @@ export class VentasComponent implements OnInit {
           console.log(ordensirijilla[i].orderedItemCnt);
       }*/
       for(var i in ordensirijilla) {
-         console.log(ordensirijilla[i].orderedItemCnt+ " "+ordensirijilla[i].totalPrice);  // (o el campo que necesites)
+         //console.log(ordensirijilla[i].orderedItemCnt+ " "+ordensirijilla[i].totalPrice);  // (o el campo que necesites)
          let productirijillo = ordensirijilla[i].item;
          productirijillo.cantidad = (productirijillo.cantidad - ordensirijilla[i].orderedItemCnt);
          
          let detalles_venta = new DetallesVenta(id, ordensirijilla[i].itemId, ordensirijilla[i].orderedItemCnt, ordensirijilla[i].totalPrice);
          this._detallesVentaServiceService.registrar(this.token, detalles_venta).subscribe(
            response =>{
-             console.log("uy no lo puedo creer!! "+JSON.stringify(productirijillo)+ " "+productirijillo.id);             
+             //console.log("uy no lo puedo creer!! "+JSON.stringify(productirijillo)+ " "+productirijillo.id);             
              this._productServiceService.update(this.token, productirijillo, productirijillo.id).subscribe(
                response=>{
-                 alert("estamos melos sisas estamos melos si si sisas");
+                 //alert("estamos melos sisas estamos melos si si sisas");
                },error=>{
-                 alert("esto es una tragedia loco :'v");
+                 //alert("esto es una tragedia loco :'v");
                }
              );
              

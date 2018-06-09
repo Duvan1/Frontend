@@ -11,6 +11,12 @@
           <form #empleadoForm="ngForm" (ngSubmit)="onSubmit(empleadoForm)">
             <div class="form-group">
               <div class="form-row">
+                <div class="col-md-12">
+                  <label for="cedulaEmp">Cedula</label>
+                  <input name="cedula" [(ngModel)]="empleado.cedula" class="form-control" id="cedulaEmp" type="number" aria-describedby="nameHelp" placeholder="Nombre del Empleado">                  
+                </div>
+              </div>
+              <div class="form-row">
                 
                 <div class="col-md-6">
                   <label for="nombreEmp">Nombre</label>

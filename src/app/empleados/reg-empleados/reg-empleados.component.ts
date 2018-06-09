@@ -64,8 +64,10 @@ export class RegEmpleadosComponent implements OnInit {
         		response=>{
         			this.user = response.user;
         			console.log(response);
+              this.router.navigate(['/empleados']);
         		},error=>{
         			console.log(<any> error);
+              
         		}
         	);
         	
@@ -82,11 +84,11 @@ export class RegEmpleadosComponent implements OnInit {
   	this._userServiceService.UserName(value).subscribe(
   		response=>{
   			if (response.message == "El usuario ya existe") {
-  				alert("ya existe");
+  				//alert("ya existe");
   				this.exist = true;
   			}
   		},error=>{
-  			alert("no existe")
+  			//alert("no existe")
   			this.exist = false;
   		}
   	);
