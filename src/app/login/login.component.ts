@@ -39,7 +39,8 @@ export class LoginComponent implements OnInit {
           if (response.status != "error") {
             this.status = 'success';                     
             this.token = response; 
-            localStorage.setItem("token", this.token);
+            alert(this.token);
+            localStorage.setItem("token", JSON.stringify(this.token));
             this._authServiceService.signup(this.user, true).subscribe(
               response=>{
                 //obtengo los datos del usuario

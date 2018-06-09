@@ -24,7 +24,8 @@ export class AuthServiceService {
   }
 
   getToken(){
-  	let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEyMywidXNlcm5hbWUiOiJQZWxsaSIsInBhc3N3b3JkIjoiZGUwNGQ1OGRjNWNjYzRiOTY3MWMzNjI3ZmI4ZDYyNmZlNGExNTgxMGJjMWZlM2U3MjRmZWVhNzYxOTY1ZmI3MSIsInJvbCI6ImFkbWluaXN0cmFkb3IiLCJpYXQiOjE1Mjg1NTMzMDAsImV4cCI6MTUyOTE1ODEwMH0.OwNN1r9eyb7ZUUrTagCVNGt6-cq1F_2mXq1mWfukFVI"
+    //console.log((localStorage.getItem("token")));
+  	let token = localStorage.getItem("token")//"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEyMywidXNlcm5hbWUiOiJQZWxsaSIsInBhc3N3b3JkIjoiZGUwNGQ1OGRjNWNjYzRiOTY3MWMzNjI3ZmI4ZDYyNmZlNGExNTgxMGJjMWZlM2U3MjRmZWVhNzYxOTY1ZmI3MSIsInJvbCI6ImFkbWluaXN0cmFkb3IiLCJpYXQiOjE1Mjg1NTMzMDAsImV4cCI6MTUyOTE1ODEwMH0.OwNN1r9eyb7ZUUrTagCVNGt6-cq1F_2mXq1mWfukFVI"
   	if (token != "undefined") {
   		 this.token = token;
   	}else{
